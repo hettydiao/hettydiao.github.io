@@ -123,23 +123,6 @@ body {
     color: white; /* White text for contrast */
 }
 
-/* Two-column layout for pets */
-.content {
-    display: flex;
-    justify-content: space-between;
-    margin: 40px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.left-column, .right-column {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-}
-
 /* Personal photo styling */
 .personal-photo {
     width: 100%;
