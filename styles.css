@@ -97,7 +97,7 @@ body {
 }
 
 .right-column a:hover {
-    color: white; /* Darker color on hover */
+    color: #3D52A0; /* Darker color on hover */
 }
 
 /* Media queries for responsiveness */
