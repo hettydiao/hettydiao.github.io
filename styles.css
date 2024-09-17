@@ -44,7 +44,7 @@ body {
 .nav-buttons a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #ADBBD9; /* Use the two-column panel color for the buttons */
+    background-color: #EDE8F5; /* Use the two-column panel color for the buttons */
     color: #3D52A0; /* Primary color for button text */
     border-radius: 5px;
     font-size: 1.2em;
@@ -52,7 +52,7 @@ body {
 }
 
 .nav-buttons a:hover {
-    background-color: #ADBBD9; /* Keep the button color same on hover */
+    background-color: white; /* Keep the button color same on hover */
 }
 
 /* Two-column layout */
@@ -81,7 +81,7 @@ body {
     width: 100%;
     max-width: 300px;
     border-radius: 10px;
-    border: 4px solid #8697C4; /* Accent border around the photo */
+    border: 4px solid white; /* Accent border around the photo */
 }
 
 /* Right column text styling */
@@ -97,7 +97,7 @@ body {
 }
 
 .right-column a:hover {
-    color: #3D52A0; /* Darker color on hover */
+    color: white; /* Darker color on hover */
 }
 
 /* Media queries for responsiveness */
