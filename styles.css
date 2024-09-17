@@ -20,9 +20,10 @@ body {
 }
 
 .header-text h1 {
+    font-family: Helvetica, sans-serif; /* Use Helvetica for header text */
     font-size: 2.5em;
     margin: 0;
-    color: white; /* Keep the text color white for readability on the image */
+    color: white;
 }
 
 /* Navigation buttons */
@@ -47,6 +48,7 @@ body {
     background-color: white; /* Use the two-column panel color for the buttons */
     color: #3D52A0; /* Primary color for button text */
     border-radius: 5px;
+    font-family: Helvetica, sans-serif;
     font-size: 1.2em;
     border: none; /* Remove the border for a flat button look */
 }
@@ -121,6 +123,12 @@ body {
 .nav-buttons a.active {
     background-color: #3D52A0; /* Darker color for the active button */
     color: white; /* White text for contrast */
+}
+
+/* Section titles */
+h2 {
+    font-family: Helvetica, sans-serif; /* Use Helvetica for section titles */
+    font-size: 1.8em;
 }
 
 /* Personal photo styling */
