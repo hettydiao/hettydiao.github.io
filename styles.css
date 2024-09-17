@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #EDE8F5; /* Lightest color for the background */
+    background-color: white; /* White background for the entire website */
 }
 
 /* Header section */
@@ -21,9 +21,8 @@ body {
 
 .header-text h1 {
     font-size: 2.5em;
-    background-color: rgba(61, 82, 160, 0.7); /* Primary color with transparency for readability */
-    padding: 10px 20px;
-    border-radius: 10px;
+    margin: 0;
+    color: white; /* Keep the text color white for readability on the image */
 }
 
 /* Navigation buttons */
@@ -45,14 +44,15 @@ body {
 .nav-buttons a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #3D52A0; /* Darkest color for the buttons */
-    color: white;
+    background-color: #ADBBD9; /* Use the two-column panel color for the buttons */
+    color: #3D52A0; /* Primary color for button text */
     border-radius: 5px;
     font-size: 1.2em;
+    border: none; /* Remove the border for a flat button look */
 }
 
 .nav-buttons a:hover {
-    background-color: #7091E6; /* Lighter shade for hover effect */
+    background-color: #ADBBD9; /* Keep the button color same on hover */
 }
 
 /* Two-column layout */
@@ -60,9 +60,10 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 40px;
-    background-color: #ADBBD9; /* Soft background for the content section */
+    background-color: white; /* White background for the two-column panel */
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
 }
 
 .left-column {
