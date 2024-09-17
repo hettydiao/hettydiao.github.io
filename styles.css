@@ -44,7 +44,7 @@ body {
 .nav-buttons a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #EDE8F5; /* Use the two-column panel color for the buttons */
+    background-color: white; /* Use the two-column panel color for the buttons */
     color: #3D52A0; /* Primary color for button text */
     border-radius: 5px;
     font-size: 1.2em;
@@ -121,4 +121,29 @@ body {
 .nav-buttons a.active {
     background-color: #3D52A0; /* Darker color for the active button */
     color: white; /* White text for contrast */
+}
+
+/* Two-column layout for pets */
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-column, .right-column {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Personal photo styling */
+.personal-photo {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    border: 4px solid white; /* Accent border */
 }
