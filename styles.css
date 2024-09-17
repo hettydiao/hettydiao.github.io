@@ -116,3 +116,9 @@ body {
         margin: 10px 0;
     }
 }
+
+/* Active button styling */
+.nav-buttons a.active {
+    background-color: #3D52A0; /* Darker color for the active button */
+    color: white; /* White text for contrast */
+}
