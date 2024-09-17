@@ -3,27 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Life</title>
+    <title>Personal Life - Hualong Diao</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Personal Life</h1>
+    <!-- Header section with background image -->
+    <header class="header-image">
+        <div class="header-text">
+            <h1>Personal Life</h1>
+        </div>
     </header>
 
-    <section>
-        <h2>My Pets</h2>
-        <div>
-            <img src=“Hemi.JPG” alt="My Dog Hemi" style="width:300px;">
-            <p>This is my lovely dog Hemi, who loves my accompany and who supports me a lot mentally.</p>
+    <!-- Navigation buttons -->
+    <nav class="nav-buttons">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cv_resume.html">CV/Resume</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="personal_life.html" class="active">Personal Life</a></li> <!-- Active button -->
+        </ul>
+    </nav>
+
+    <!-- Content section for Personal Life with two columns -->
+    <section class="content">
+        <div class="left-column">
+            <h2>My Pets - Hemi</h2>
+            <img src="Hemi.JPG" alt="My Dog Hemi" class="personal-photo">
+            <p>This is my lovely dog Hemi, who loves my company and who supports me a lot mentally.</p>
         </div>
-        <div>
-            <img src=“Cheeto.JPG” alt="My Cat Cheeto" style="width:300px;">
-            <p>This is my handsome cat Cheeto, who stays with me all the time. When I am working, he is the one who sleeps behind me. </p>
+        <div class="right-column">
+            <h2>My Pets - Cheeto</h2>
+            <img src="Cheeto.JPG" alt="My Cat Cheeto" class="personal-photo">
+            <p>This is my handsome cat Cheeto, who stays with me all the time. When I am working, he is the one who sleeps behind me.</p>
         </div>
-        <p>I love them soooo much!</p>
     </section>
 
-
+    <footer>
+        <p>I love them soooo much!</p>
+    </footer>
 </body>
 </html>
