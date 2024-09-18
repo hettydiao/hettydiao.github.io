@@ -21,6 +21,9 @@ body {
     justify-content: center;
     color: white;
     text-align: center;
+    width: 100vw; /* Ensure the header covers the full viewport width */
+    margin: 0; /* Ensure no margin around the header */
+    padding: 0; /* Ensure no padding around the header */
     overflow: hidden;
 }
 
