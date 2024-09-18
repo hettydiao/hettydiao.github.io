@@ -138,7 +138,7 @@ footer p {
 }
 
 /* Right column text styling */
-.right-column p {
+.right-column {
     font-size: 1.1em;
     line-height: 1.6;
     color: black; /* Set right column text to black */
