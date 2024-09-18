@@ -36,6 +36,7 @@ body {
 /* Ensure header text is above the overlay */
 .header-text {
     position: relative;
+    font-family: Helvetica, sans-serif;
     z-index: 2; /* Ensure the text appears above the overlay */
     color: white; /* Set header text to white */
 }
@@ -96,25 +97,53 @@ a:hover {
     color: #315545; /* Change color on hover */
 }
 
-/* Two-column layout */
+/* Personal Life Section - Fullscreen images and hover effect */
 .content {
     display: flex;
     justify-content: space-between;
-    margin: 40px;
-    background-color: white; /* White background for the two-column panel */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+    height: 100vh; /* Make content section fill the viewport height */
+    padding: 0; /* Remove padding to allow full section coverage */
 }
 
-.left-column {
+.pet-section {
+    position: relative;
     flex: 1;
-    text-align: center;
+    overflow: hidden;
 }
 
-.right-column {
-    flex: 2;
-    padding-left: 30px;
+.personal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the images fill the container */
+    transition: opacity 0.5s ease; /* Smooth transition when hovering */
+}
+
+/* Overlay to display text on hover */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent grey overlay */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.5s ease; /* Smooth transition for hover */
+    text-align: center;
+    padding: 20px;
+}
+
+/* On hover, show the overlay and make the image more transparent */
+.pet-section:hover .personal-photo {
+    opacity: 0.5;
+}
+
+.pet-section:hover .overlay {
+    opacity: 1;
 }
 
 /* Footer styling */
@@ -129,30 +158,12 @@ footer p {
     margin: 10px 0;
 }
 
-/* Personal photo styling */
-.personal-photo {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    border: 4px solid white; /* White border for all personal photos */
-}
-
-/* Right column text styling */
-.right-column p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: black; /* Set right column text to black */
-}
-
 /* Mobile responsive styling */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
         align-items: center;
-    }
-
-    .right-column {
-        padding-left: 0;
+        height: auto;
     }
 
     .nav-buttons li {
