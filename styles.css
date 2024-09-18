@@ -1,9 +1,10 @@
 /* General styles */
 body {
-    font-family: Georgia, sans-serif;
+    font-family: Georgia, sans-serif; /* Default body font set to Arial */
     margin: 0;
     padding: 0;
     background-color: white; /* White background for the entire website */
+    color: black; /* Set all text to black */
 }
 
 /* Header section with transparent grey overlay */
@@ -16,7 +17,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: black; /* Set header text to black */
     text-align: center;
 }
 
@@ -57,16 +58,41 @@ body {
 .nav-buttons a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: white; /* Use the two-column panel color for the buttons */
-    color: #3D52A0; /* Primary color for button text */
-    border-radius: 5px;
+    color: black; /* Set navigation text color to black */
     font-family: Helvetica, sans-serif;
     font-size: 1.2em;
-    border: none; /* Remove the border for a flat button look */
+    position: relative;
+    border: none; /* No border by default */
 }
 
 .nav-buttons a:hover {
-    background-color: #7091E6; /* Keep the button color same on hover */
+    color: black; /* Keep text black on hover */
+}
+
+.nav-buttons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid black; /* Black rectangular border on hover */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.nav-buttons a:hover::before {
+    opacity: 1; /* Show the black rectangular border on hover */
+}
+
+/* Link styles */
+a {
+    color: #4e824f; /* Default color for links */
+    text-decoration: none; /* Removes underline */
+}
+
+a:hover {
+    color: #315545; /* Change color on hover */
 }
 
 /* Two-column layout */
@@ -83,20 +109,6 @@ body {
 .left-column {
     flex: 1;
     text-align: center;
-}
-
-/* LinkedIn link styling */
-.left-column a {
-    display: block;
-    margin-top: 10px;
-    color: #7091E6; /* Color for LinkedIn link */
-    font-size: 1.2em;
-    text-decoration: none;
-}
-
-.left-column a:hover {
-    color: #3D52A0; /* Darker color on hover */
-    text-decoration: underline;
 }
 
 .right-column {
@@ -128,19 +140,10 @@ footer p {
 .right-column p {
     font-size: 1.1em;
     line-height: 1.6;
-    color: #3D52A0; /* Primary color for the text */
+    color: black; /* Set right column text to black */
 }
 
-/* Links inside the content */
-.right-column a {
-    color: #7091E6; /* Lighter color for the links */
-}
-
-.right-column a:hover {
-    color: #3D52A0; /* Darker color on hover */
-}
-
-/* Media queries for responsiveness */
+/* Mobile responsive styling */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
@@ -154,84 +157,5 @@ footer p {
     .nav-buttons li {
         display: block;
         margin: 10px 0;
-    }
-}
-
-/* Active button styling */
-.nav-buttons a.active {
-    background-color: #3D52A0; /* Darker color for the active button */
-    color: white; /* White text for contrast */
-}
-
-/* Section titles */
-h2 {
-    font-family: Helvetica, sans-serif; /* Use Helvetica for section titles */
-    font-size: 1.8em;
-}
-
-/* Personal photo styling */
-.personal-photo {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    border: 4px solid white; /* White border for all personal photos */
-}
-
-/* Link styles */
-a {
-    color: #7091E6; /* Default color for links */
-    text-decoration: none; /* Removes underline */
-}
-
-a:hover, a:active {
-    color: #3D52A0; /* Darker color on hover or click */
-    text-decoration: underline; /* Optional: adds underline on hover */
-}
-
-/* General content styling */
-.content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Align items to the top */
-    flex-wrap: wrap; /* Allow items to wrap if the screen is too small */
-    gap: 20px; /* Adds space between the pet sections */
-    margin: 40px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.pet-section {
-    text-align: center; /* Center the text and image */
-    width: 45%; /* Adjusts the width so two pet sections fit side by side */
-    margin-bottom: 20px;
-}
-
-.pet-section h2, .pet-section p {
-    text-align: center; /* Ensure the text is centered */
-}
-
-.personal-photo {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    margin-top: 10px;
-    border: 4px solid white; /* White border for all personal photos */
-    display: block;
-    margin-left: auto;
-    margin-right: auto; /* Center the image horizontally */
-}
-
-/* Mobile responsive styling */
-@media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .pet-section {
-        width: 100%; /* On smaller screens, each section takes full width */
-        text-align: center;
     }
 }
