@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Hualong Diao, Hetty Diao, Stony Brook, Economics, Ph.D., Data">
+    <meta name="description" content="Hualong (Hetty) Diao, Ph.D. Candidate at Stony Brook University, Data Page">
+    <title>Data - Hualong Diao</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header section with background image -->
+    <header class="header-image">
+        <div class="header-text">
+            <h1>Data</h1>
+        </div>
+    </header>
+
+    <!-- Navigation buttons -->
+    <nav class="nav-buttons">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cv_resume.html">CV/Resume</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="data.html" class="active">Data</a></li> <!-- Active button -->
+            <li><a href="personal_life.html">Personal Life</a></li>
+        </ul>
+    </nav>
+
+    <!-- Data Content Section -->
+    <section class="content">
+        <div class="data-section">
+            <h2>Data I Worked With</h2>
+            <p>I have extensive experience working with various types of large data, including large survey, cancer registry, clinical trials, and electronic health record data:</p>
+
+            <ul>
+                <li><strong>Health and Retirement Study (HRS)</strong> – A long-term panel study surveying older Americans to gather data on health, retirement, income, and wealth.</li>
+                <li><strong>Panel Study of Income Dynamics (PSID)</strong> – A longitudinal panel survey of U.S. individuals and families to assess economic, social, and health factors over time.</li>
+                <li><strong>Medical Expenditure Panel Survey (MEPS)</strong> – A set of large-scale surveys of families and individuals, their medical providers, and employers to collect data on the cost and use of healthcare.</li>
+                <li><strong>National Health Interview Survey (NHIS)</strong> – A national survey used to track the health of the U.S. population by collecting data on a broad range of health topics.</li>
+                <li><strong>Surveillance, Epidemiology, and End Results (SEER)</strong> – A large cancer registry program that provides information on cancer statistics and trends across the U.S.</li>
+                <li><strong>National Lung Screening Trial (NLST)</strong> – A large clinical trial aimed at determining if low-dose CT scans are effective in reducing lung cancer deaths compared to chest x-rays.</li>
+            </ul>
+
+            <p>Through working with these datasets, I have developed expertise in cleaning, managing, and analyzing large datasets, making informed decisions using econometric and statistical tools.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Last updated: <span id="last-updated"></span></p>
+    </footer>
+
+    <script>
+        // JavaScript to dynamically show only the date
+        const lastModified = new Date(document.lastModified);
+        document.getElementById("last-updated").textContent = lastModified.toLocaleDateString();
+    </script>
+
+</body>
+</html>
