@@ -1,4 +1,4 @@
-/* General styles */
+d/* General styles */
 body {
     font-family: Georgia, serif; /* Default body font set to Georgia */
     margin: 0;
@@ -11,7 +11,7 @@ body {
 
 .header-image {
     position: relative;
-    background-image: url('/mnt/data/head-image.jpg'); /* Ensure this points to the correct image path */
+    background-image: url('header-image.jpg'); /* Ensure this points to the correct image path */
     background-size: cover; /* Cover the entire width of the container, truncate the length */
     background-position: center; /* Align image to the top center */
     height: 70vh; /* Adjust the height to control how much of the image is shown */
