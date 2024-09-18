@@ -3,6 +3,7 @@ body {
     font-family: Georgia, serif; /* Default body font set to Georgia */
     margin: 0;
     padding: 0;
+    width: 100%;
     background-color: white; /* White background for the entire website */
     color: black; /* Set all text to black */
 }
