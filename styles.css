@@ -1,6 +1,6 @@
 /* General styles */
 body {
-    font-family: Georgia, sans-serif; /* Default body font set to Arial */
+    font-family: Georgia, serif; /* Default body font set to Georgia */
     margin: 0;
     padding: 0;
     background-color: white; /* White background for the entire website */
@@ -17,7 +17,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white; /* Set header text to black */
+    color: white; /* Set header text to white */
     text-align: center;
 }
 
@@ -37,6 +37,7 @@ body {
 .header-text {
     position: relative;
     z-index: 2; /* Ensure the text appears above the overlay */
+    color: white; /* Set header text to white */
 }
 
 /* Navigation buttons */
@@ -121,7 +122,7 @@ footer {
     text-align: center;
     margin-top: 30px;
     font-size: 1em;
-    color: #8697C4;
+    color: grey; /* Set last updated text to grey */
 }
 
 footer p {
