@@ -21,7 +21,7 @@ body {
     text-align: center;
 }
 
-/* Transparent grey overlay for header */
+/* Transparent grey overlay */
 .header-image::before {
     content: '';
     position: absolute;
@@ -96,77 +96,25 @@ a:hover {
     color: #315545; /* Change color on hover */
 }
 
-/* Homepage image styling (original settings) */
-.personal-photo {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    border: 4px solid white; /* White border for all personal photos */
-    margin: 20px auto;
-}
-
-/* Content section with white frame */
-.content.white-frame {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-    margin: 40px;
-    border: 2px solid #EDE8F5; /* Light border around the content */
-}
-
-/* Personal Life Section - Images inside the white frame */
-.content.pets-frame {
+/* Two-column layout */
+.content {
     display: flex;
     justify-content: space-between;
-    padding: 20px; /* Padding inside the white frame */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
     margin: 40px;
-    border: 2px solid #EDE8F5; /* Light border around the content */
-}
-
-.pet-section {
-    position: relative;
-    flex: 1;
-    margin: 0 10px; /* Spacing between the two images */
-    overflow: hidden;
-    border-radius: 10px; /* Round corners inside the frame */
-}
-
-.personal-photo-fullscreen {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the images fill the container */
-    transition: opacity 0.5s ease; /* Smooth transition when hovering */
-}
-
-/* Overlay to display text on hover for personal life section */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Transparent grey overlay */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.5s ease; /* Smooth transition for hover */
-    text-align: center;
+    background-color: white; /* White background for the two-column panel */
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
 }
 
-/* On hover, show the overlay and make the image more transparent */
-.pet-section:hover .personal-photo-fullscreen {
-    opacity: 0.5;
+.left-column {
+    flex: 1;
+    text-align: center;
 }
 
-.pet-section:hover .overlay {
-    opacity: 1;
+.right-column {
+    flex: 2;
+    padding-left: 30px;
 }
 
 /* Footer styling */
@@ -181,15 +129,30 @@ footer p {
     margin: 10px 0;
 }
 
+/* Personal photo styling */
+.personal-photo {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    border: 4px solid white; /* White border for all personal photos */
+}
+
+/* Right column text styling */
+.right-column p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: black; /* Set right column text to black */
+}
+
 /* Mobile responsive styling */
 @media (max-width: 768px) {
-    .content.pets-frame {
+    .content {
         flex-direction: column;
         align-items: center;
     }
 
-    .pet-section {
-        margin-bottom: 20px;
+    .right-column {
+        padding-left: 0;
     }
 
     .nav-buttons li {
