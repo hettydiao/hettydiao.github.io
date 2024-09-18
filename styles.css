@@ -185,11 +185,14 @@ footer p {
     opacity: 1;
 }
 
+
+
 /* Mobile responsive styling */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
         align-items: center;
+        padding: 0 20px;
     }
 
     .right-column {
@@ -199,5 +202,64 @@ footer p {
     .nav-buttons li {
         display: block;
         margin: 10px 0;
+    }
+
+    .pet-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Adds space between stacked sections */
+    }
+
+    .personal-photo-fullscreen {
+        height: auto;
+        width: 100%;
+    }
+
+    /* Adjust the overlay to show on the side for mobile */
+    .overlay {
+        position: static; /* Remove absolute positioning */
+        background-color: transparent; /* Remove the transparent background */
+        color: black; /* Change text color to black for visibility */
+        opacity: 1; /* Ensure text is always visible on mobile */
+        padding: 10px;
+        width: auto;
+        height: auto;
+        text-align: left;
+    }
+
+    /* Reorganize to display the image and text side by side on mobile */
+    .pet-section {
+        flex-direction: row; /* Place image and text side by side */
+        align-items: flex-start;
+    }
+
+    .personal-photo-fullscreen {
+        width: 50%; /* Half the width for the image */
+        height: auto;
+    }
+
+    .overlay {
+        width: 50%; /* Half the width for the text */
+        padding-left: 20px;
+    }
+}
+
+/* Additional media queries for very small devices */
+@media (max-width: 480px) {
+    .personal-photo-fullscreen {
+        height: auto;
+        width: 100%; /* Full width on very small devices */
+    }
+
+    .overlay {
+        width: 100%; /* Full width text on very small devices */
+        text-align: center; /* Center the text on very small devices */
+        padding-left: 0;
+    }
+
+    .pet-section {
+        flex-direction: column; /* Stack the image and text again on very small screens */
     }
 }
