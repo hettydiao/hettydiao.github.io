@@ -12,6 +12,7 @@ body {
 /* Header section */
 .header-image {
     background-image: url('header-image.jpg'); /* Replace with your background image URL */
+    position: relative; 
     background-size: cover;
     background-position: center;
     height: 300px;
