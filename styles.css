@@ -4,6 +4,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
+    overflow-x: hidden;
     background-color: white; /* White background for the entire website */
     color: black; /* Set all text to black */
 }
@@ -22,7 +24,7 @@ body {
     justify-content: center;
     color: white;
     text-align: center;
-    width: 100vw; /* Ensure the header covers the full viewport width */
+    width: 100%; /* Ensure the header covers the full viewport width */
     margin: 0; /* Ensure no margin around the header */
     padding: 0; /* Ensure no padding around the header */
     overflow: hidden;
