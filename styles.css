@@ -21,7 +21,7 @@ body {
     text-align: center;
 }
 
-/* Transparent grey overlay */
+/* Transparent grey overlay for header */
 .header-image::before {
     content: '';
     position: absolute;
@@ -36,7 +36,6 @@ body {
 /* Ensure header text is above the overlay */
 .header-text {
     position: relative;
-    font-family: Helvetica, sans-serif;
     z-index: 2; /* Ensure the text appears above the overlay */
     color: white; /* Set header text to white */
 }
@@ -97,8 +96,38 @@ a:hover {
     color: #315545; /* Change color on hover */
 }
 
+/* Standard image styling for homepage */
+.personal-photo {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    border: 4px solid white; /* White border for all personal photos */
+}
+
+/* Content section with white frame */
+.content.white-frame {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    margin: 40px;
+    border: 2px solid #EDE8F5; /* Light border around the content */
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1em;
+    color: grey; /* Set last updated text to grey */
+}
+
+footer p {
+    margin: 10px 0;
+}
+
 /* Personal Life Section - Fullscreen images and hover effect */
-.content {
+.content.fullscreen {
     display: flex;
     justify-content: space-between;
     height: 100vh; /* Make content section fill the viewport height */
@@ -111,14 +140,14 @@ a:hover {
     overflow: hidden;
 }
 
-.personal-photo {
+.personal-photo-fullscreen {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensure the images fill the container */
     transition: opacity 0.5s ease; /* Smooth transition when hovering */
 }
 
-/* Overlay to display text on hover */
+/* Overlay to display text on hover for personal life section */
 .overlay {
     position: absolute;
     top: 0;
@@ -138,7 +167,7 @@ a:hover {
 }
 
 /* On hover, show the overlay and make the image more transparent */
-.pet-section:hover .personal-photo {
+.pet-section:hover .personal-photo-fullscreen {
     opacity: 0.5;
 }
 
@@ -146,23 +175,14 @@ a:hover {
     opacity: 1;
 }
 
-/* Footer styling */
-footer {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 1em;
-    color: grey; /* Set last updated text to grey */
-}
-
-footer p {
-    margin: 10px 0;
-}
-
 /* Mobile responsive styling */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
         align-items: center;
+    }
+
+    .content.fullscreen {
         height: auto;
     }
 
