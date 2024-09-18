@@ -96,12 +96,13 @@ a:hover {
     color: #315545; /* Change color on hover */
 }
 
-/* Standard image styling for homepage */
+/* Homepage image styling (original settings) */
 .personal-photo {
     width: 100%;
     max-width: 300px;
     border-radius: 10px;
     border: 4px solid white; /* White border for all personal photos */
+    margin: 20px auto;
 }
 
 /* Content section with white frame */
@@ -114,30 +115,23 @@ a:hover {
     border: 2px solid #EDE8F5; /* Light border around the content */
 }
 
-/* Footer styling */
-footer {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 1em;
-    color: grey; /* Set last updated text to grey */
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-/* Personal Life Section - Fullscreen images and hover effect */
-.content.fullscreen {
+/* Personal Life Section - Images inside the white frame */
+.content.pets-frame {
     display: flex;
     justify-content: space-between;
-    height: 100vh; /* Make content section fill the viewport height */
-    padding: 0; /* Remove padding to allow full section coverage */
+    padding: 20px; /* Padding inside the white frame */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    margin: 40px;
+    border: 2px solid #EDE8F5; /* Light border around the content */
 }
 
 .pet-section {
     position: relative;
     flex: 1;
+    margin: 0 10px; /* Spacing between the two images */
     overflow: hidden;
+    border-radius: 10px; /* Round corners inside the frame */
 }
 
 .personal-photo-fullscreen {
@@ -175,15 +169,27 @@ footer p {
     opacity: 1;
 }
 
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1em;
+    color: grey; /* Set last updated text to grey */
+}
+
+footer p {
+    margin: 10px 0;
+}
+
 /* Mobile responsive styling */
 @media (max-width: 768px) {
-    .content {
+    .content.pets-frame {
         flex-direction: column;
         align-items: center;
     }
 
-    .content.fullscreen {
-        height: auto;
+    .pet-section {
+        margin-bottom: 20px;
     }
 
     .nav-buttons li {
