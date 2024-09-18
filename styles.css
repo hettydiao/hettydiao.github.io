@@ -12,7 +12,7 @@ body {
     position: relative; /* Positioning relative for the overlay */
     background-image: url('header-image.jpg'); /* Replace with your background image URL */
     background-size: cover;
-    background-position: top; /* Align background image to the top */
+    background-position: center; /* Align background image to the top */
     height: 300px;
     display: flex;
     align-items: center;
