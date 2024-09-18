@@ -14,7 +14,7 @@ body {
     background-image: url('/mnt/data/head-image.jpg'); /* Ensure this points to the correct image path */
     background-size: cover; /* Cover the entire width of the container, truncate the length */
     background-position: center; /* Align image to the top center */
-    height: 300px; /* Adjust the height to control how much of the image is shown */
+    height: 70vh; /* Adjust the height to control how much of the image is shown */
     display: flex;
     align-items: center;
     justify-content: center;
