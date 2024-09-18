@@ -17,7 +17,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black; /* Set header text to black */
+    color: white; /* Set header text to black */
     text-align: center;
 }
 
