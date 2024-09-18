@@ -2,5 +2,6 @@ title: "Hualong Diao's Website"
 description: "A personal website for Hualong Diao, a Ph.D. Candidate in Economics at Stony Brook University. Check out her research and experiences!"
 url: "https://hettydiao.github.io"
 author: "Hualong Diao"
+google_site_verification: "Apv7iOOJveGzwY14CPd0eSzHqGfYRDqunf1L_e73NJ0"
 plugins:
   - jekyll-seo-tag
