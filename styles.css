@@ -1,5 +1,5 @@
-d/* General styles */
-body {
+/* General styles */
+html, body {
     font-family: Georgia, serif; /* Default body font set to Georgia */
     margin: 0;
     padding: 0;
@@ -25,6 +25,7 @@ body {
     color: white;
     text-align: center;
     width: 100%; /* Ensure the header covers the full viewport width */
+    max-width: 100%;
     margin: 0; /* Ensure no margin around the header */
     padding: 0; /* Ensure no padding around the header */
     overflow: hidden;
