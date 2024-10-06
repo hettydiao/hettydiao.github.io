@@ -143,6 +143,8 @@ a:hover {
 .home-middle-column {
     flex: 2;
     padding: 0 20px;
+    font-size: 1.25rem; /* Larger font size (adjust as needed) */
+    line-height: 1.8; /* Increase line spacing for better readability */
 }
 
 /* Right column (contact form) */
