@@ -204,32 +204,34 @@ form {
 
 /* Style for underlined input fields */
 input[type="text"], input[type="email"], textarea {
-    background-color: transparent; /* Transparent background */
-    border: none; /* Remove default borders */
-    border-bottom: 2px solid black; /* Add an underline */
-    outline: none; /* Remove focus outline */
-    width: 100%; /* Full width */
-    padding: 5px 0; /* Add space around the text */
-    font-size: 16px; /* Font size */
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin-bottom: 10px; /* Reduce space below the input */
 }
 
 /* Style for the textarea */
 textarea {
-    resize: vertical; /* Allow vertical resizing only */
-    min-height: 100px; /* Set a minimum height */
+    resize: vertical;
+    min-height: 100px;
+    margin-bottom: 10px; /* Reduce space below the textarea */
 }
 
 /* Focus state to change underline color */
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    border-bottom: 2px solid #4e824f; /* Change underline color on focus */
-    transition: border-color 0.3s ease; /* Smooth transition */
+    border-bottom: 2px solid #4e824f;
+    transition: border-color 0.3s ease;
 }
 
 /* Style for the labels */
 label {
     font-weight: bold;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px; /* Smaller space below labels */
 }
 
 /* Style for the submit button */
