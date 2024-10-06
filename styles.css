@@ -126,8 +126,34 @@ a:hover {
     padding-left: 30px;
 }
 
+/* Three-column layout */
+/* Left column (personal picture) */
+.home-left-column {
+    flex: 1;
+    text-align: center;
+    padding-right: 20px;
+}
+
+.home-left-column img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+/* Middle column (introduction) */
+.home-middle-column {
+    flex: 2;
+    padding: 0 20px;
+}
+
+/* Right column (contact form) */
+.home-right-column {
+    flex: 1;
+    padding-left: 20px;
+}
+
 /* Right column text styling */
-.right-column p {
+.home-right-column p {
     font-size: 1.1em;
     line-height: 1.6;
     color: black; /* Set right column text to black */
