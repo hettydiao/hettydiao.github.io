@@ -136,7 +136,7 @@ a:hover {
 
 .home-left-column img {
     width: 150px;
-    height: 150px;
+    height: auto;
 }
 
 /* Middle column (introduction) */
