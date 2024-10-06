@@ -194,12 +194,11 @@ footer p {
     opacity: 1;
 }
 
-/* Contact form styles */
-form {
-    max-width: 500px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+/* Apply the same font family to the form */
+form, label, input, textarea {
+    font-family: Georgia, serif; /* Use the same font as the introduction text */
+    font-size: 16px;
+    text-align: left; /* Align text to the left */
 }
 
 /* Style for underlined input fields */
@@ -211,14 +210,14 @@ input[type="text"], input[type="email"], textarea {
     width: 100%;
     padding: 5px 0;
     font-size: 16px;
-    margin-bottom: 10px; /* Reduce space below the input */
+    margin-bottom: 5px; /* Reduce space below inputs */
 }
 
-/* Style for the textarea */
+/* Remove excess space under the "Your Message" label */
 textarea {
     resize: vertical;
     min-height: 100px;
-    margin-bottom: 10px; /* Reduce space below the textarea */
+    margin-bottom: 5px; /* Adjust spacing */
 }
 
 /* Focus state to change underline color */
