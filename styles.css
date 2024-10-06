@@ -194,30 +194,43 @@ footer p {
     opacity: 1;
 }
 
-/* Apply the same font family to the form */
+/* Apply the same font family to the form, without bold text */
 form, label, input, textarea {
-    font-family: Georgia, serif; /* Use the same font as the introduction text */
+    font-family: Arial, sans-serif; /* Use the same font as the introduction text */
     font-size: 16px;
     text-align: left; /* Align text to the left */
+    font-weight: normal; /* Ensure labels are not bold */
 }
 
-/* Style for underlined input fields */
-input[type="text"], input[type="email"], textarea {
+/* Style for underlined input fields for Your Name and Your Email */
+input[type="text"], input[type="email"] {
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid black; /* Add an underline */
     outline: none;
     width: 100%;
-    padding: 5px 0;
+    padding: 5px 0; /* Minimal padding */
     font-size: 16px;
-    margin-bottom: 5px; /* Reduce space below inputs */
+    margin-bottom: 5px; /* Minimal space below inputs */
 }
 
-/* Remove excess space under the "Your Message" label */
+/* Custom underline style near labels for Your Name and Your Email */
+input[type="text"]::placeholder, input[type="email"]::placeholder {
+    text-align: left; /* Align placeholder text left */
+}
+
+/* Style for the textarea (Your Message) */
 textarea {
-    resize: vertical;
-    min-height: 100px;
-    margin-bottom: 5px; /* Adjust spacing */
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid black; /* Underline only */
+    outline: none;
+    width: 100%;
+    padding: 5px 0; /* Adjust padding */
+    font-size: 16px;
+    margin-bottom: 5px; /* Minimal space */
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Set a minimum height for message area */
 }
 
 /* Focus state to change underline color */
@@ -228,8 +241,9 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 /* Style for the labels */
 label {
-    font-weight: bold;
-    display: block;
+    font-weight: normal; /* No bold text */
+    display: inline-block;
+    margin-right: 10px; /* Ensure the underline is near the label */
     margin-bottom: 3px; /* Smaller space below labels */
 }
 
