@@ -202,21 +202,16 @@ form, label, input, textarea {
     font-weight: normal; /* Ensure labels are not bold */
 }
 
-/* Style for underlined input fields for Your Name and Your Email */
+/* Style for the input fields (Your Name and Your Email) with a reasonable width */
 input[type="text"], input[type="email"] {
     background-color: transparent;
     border: none;
     border-bottom: 2px solid black; /* Add an underline */
     outline: none;
-    width: 100%;
-    padding: 5px 0; /* Minimal padding */
+    width: 300px; /* Set a fixed reasonable width for the inputs */
+    padding: 5px 0;
     font-size: 16px;
-    margin-bottom: 5px; /* Minimal space below inputs */
-}
-
-/* Custom underline style near labels for Your Name and Your Email */
-input[type="text"]::placeholder, input[type="email"]::placeholder {
-    text-align: left; /* Align placeholder text left */
+    margin-bottom: 5px;
 }
 
 /* Style for the textarea (Your Message) */
@@ -225,12 +220,12 @@ textarea {
     border: none;
     border-bottom: 2px solid black; /* Underline only */
     outline: none;
-    width: 100%;
-    padding: 5px 0; /* Adjust padding */
+    width: 100%; /* Full width for the message textarea */
+    padding: 5px 0;
     font-size: 16px;
-    margin-bottom: 5px; /* Minimal space */
+    margin-bottom: 5px;
     resize: vertical; /* Allow vertical resizing */
-    min-height: 100px; /* Set a minimum height for message area */
+    min-height: 100px;
 }
 
 /* Focus state to change underline color */
@@ -241,10 +236,10 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 /* Style for the labels */
 label {
-    font-weight: normal; /* No bold text */
+    font-weight: normal;
     display: inline-block;
-    margin-right: 10px; /* Ensure the underline is near the label */
-    margin-bottom: 3px; /* Smaller space below labels */
+    margin-right: 10px;
+    margin-bottom: 3px;
 }
 
 /* Style for the submit button */
