@@ -196,7 +196,7 @@ footer p {
 
 /* Apply the same font family to the form, without bold text */
 form, label, input, textarea {
-    font-family: Arial, sans-serif; /* Use the same font as the introduction text */
+    font-family: Georgia, serif; /* Use the same font as the introduction text */
     font-size: 16px;
     text-align: left; /* Align text to the left */
     font-weight: normal; /* Ensure labels are not bold */
@@ -220,7 +220,7 @@ textarea {
     border: none;
     border-bottom: 2px solid black; /* Underline only */
     outline: none;
-    width: 100%; /* Full width for the message textarea */
+    width: 300px; /* Full width for the message textarea */
     padding: 5px 0;
     font-size: 16px;
     margin-bottom: 5px;
