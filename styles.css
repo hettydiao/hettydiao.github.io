@@ -193,8 +193,7 @@ footer p {
 
 .pet-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr); /* Two pictures per row */
     max-width: 100%;
 }
 
