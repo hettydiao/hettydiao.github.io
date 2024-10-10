@@ -194,6 +194,7 @@ footer p {
 .pet-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two pictures per row */
+    grid-gap: 20px; /* Spacing between images */
     max-width: 100%;
 }
 
