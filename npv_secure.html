@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Secure NPV Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Arial, sans-serif; max-width: 980px; margin: 24px auto; padding: 0 16px; }
+    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); background: #fff; }
+    input, button, textarea { padding: 8px; font-size: 14px; width: 100%; }
+    #calculator { display: none; }  /* Hidden until password is entered */
+    .warn { color: red; }
+  </style>
+</head>
+<body>
+
+  <!-- Password Section -->
+  <div id="login" class="card">
+    <h2>Enter Password</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error" class="warn"></p>
+  </div>
+
+  <!-- Calculator Section -->
+  <div id="calculator">
+    <h1>Net Present Value (NPV) – Calculator with Table & Charts</h1>
+    <p>Please click <b>Compute & Plot</b> after entering the required inputs. The number of cash flow entries must equal the number of years.</p>
+
+    <div class="card">
+      <label>Discount Rate (e.g. 0.05 = 5%)</label>
+      <input id="rate" type="number" step="0.005" min="0" value="0.05"><br><br>
+
+      <label>Initial Investment</label>
+      <input id="initial" type="number" step="100" min="0" value="1000"><br><br>
+
+      <label>Number of Years</label>
+      <input id="years" type="number" step="1" min="1" value="5"><br><br>
+
+      <label>Cash Flows (comma separated)</label>
+      <textarea id="cflows">400, 400, 400, 400, 400</textarea><br>
+
+      <button id="run">Compute & Plot</button>
+      <div id="kpi">NPV = $0.00</div>
+    </div>
+
+    <div id="table" class="card"></div>
+    <div id="plot1" class="card"></div>
+    <div id="plot2" class="card"></div>
+  </div>
+
+  <!-- Password Logic -->
+  <script>
+    const CORRECT_PASSWORD = "economics2025"; // Change your password here
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === CORRECT_PASSWORD) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("calculator").style.display = "block";
+      } else {
+        document.getElementById("error").textContent = "Incorrect password. Please try again.";
+      }
+    }
+  </script>
+
+  <!-- NPV Calculator Script -->
+  <script>
+    function fmtMoney(x) {
+      const neg = x < 0;
+      const v = Math.abs(x).toLocaleString(undefined, {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      });
+      return (neg ? "-$" : "$") + v;
+    }
+
+    function computeNPV(rate, initial, cashFlows) {
+      const years = Array.from({length: cashFlows.length}, (_, i) => i + 1);
+      const discounted = years.map((t, i) => cashFlows[i] / Math.pow(1 + rate, t));
+      const npv = discounted.reduce((a, b) => a + b, 0) - initial;
+      const cum = [];
+      let s = 0;
+      discounted.forEach(d => { s += d; cum.push(s); });
+      return { years, discounted, cum, npv };
+    }
+
+    function renderTable(container, years, cashFlows, discounted, cum) {
+      let html = "<h3>Results Table</h3><table><tr><th>Year</th><th>Cash Flow</th><th>Discounted Cash Flow</th><th>Cumulative Discounted</th></tr>";
+      years.forEach((y, i) => {
+        html += `<tr>
+          <td>${y}</td>
+          <td>${fmtMoney(cashFlows[i])}</td>
+          <td>${fmtMoney(discounted[i])}</td>
+          <td>${fmtMoney(cum[i])}</td>
+        </tr>`;
+      });
+      html += "</table>";
+      container.innerHTML = html;
+    }
+
+    function renderSVGBarLine({xVals, bars = [], lineVals = [], title, yLabel}) {
+      const allVals = [...bars, ...lineVals];
+      const maxVal = Math.max(...allVals, 0);
+      const minVal = Math.min(...allVals, 0);
+      const W = 900, H = 360, pad = 50;
+      const yScale = v => H - pad - (v - minVal) * ((H - 2 * pad) / (maxVal - minVal || 1));
+      const xScale = i => pad + i * ((W - 2 * pad) / (xVals.length - 1 || 1));
+
+      let svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+        <text x="${W/2}" y="20" text-anchor="middle" font-size="18">${title}</text>`;
+      bars.forEach((v, i) => {
+        svg += `<rect x="${xScale(i)-10}" y="${yScale(v)}" width="20" height="${Math.abs(yScale(0)-yScale(v))}" fill="#88aaff"/>`;
+      });
+      if (lineVals.length) {
+        svg += `<polyline fill="none" stroke="red" stroke-width="2" points="${
+          lineVals.map((v, i) => `${xScale(i)},${yScale(v)}`).join(" ")
+        }"/>`;
+      }
+      svg += "</svg>";
+      return svg;
+    }
+
+    document.getElementById("run").onclick = function () {
+      const r = parseFloat(rate.value), i = parseFloat(initial.value), n = +years.value;
+      const cf = cflows.value.split(",").map(Number);
+
+      if (cf.length !== n) {
+        kpi.textContent = "The number of cash flows must equal the number of years.";
+        return;
+      }
+
+      const result = computeNPV(r, i, cf);
+      kpi.textContent = "NPV = " + fmtMoney(result.npv);
+      renderTable(document.getElementById("table"), result.years, cf, result.discounted, result.cum);
+      document.getElementById("plot1").innerHTML = renderSVGBarLine({xVals: result.years, bars: cf, lineVals: result.discounted, title: "Cash Flow vs Discounted", yLabel: "Amount"});
+      document.getElementById("plot2").innerHTML = renderSVGBarLine({xVals: result.years, lineVals: result.cum, title: "Cumulative Discounted Cash Flow", yLabel: "Amount"});
+    };
+  </script>
+
+</body>
+</html>
