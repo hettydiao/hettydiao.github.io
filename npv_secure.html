@@ -2,141 +2,272 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Secure NPV Calculator</title>
+  <title>NPV Calculator (Test Version)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Arial, sans-serif; max-width: 980px; margin: 24px auto; padding: 0 16px; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    p.hint { color:#444; margin-top:0; }
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    label { font-size: 14px; }
+    input, button, textarea { width: 100%; padding: 8px; font-size: 14px; }
+    textarea { height: 70px; }
+    #kpi { font-weight: 700; margin-top: 8px; }
     .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); background: #fff; }
-    input, button, textarea { padding: 8px; font-size: 14px; width: 100%; }
-    #calculator { display: none; }  /* Hidden until password is entered */
-    .warn { color: red; }
+    .stack { display: grid; gap: 16px; }
+    .muted { color:#777; font-size:12px; }
+    .warn { color:#c00; }
+    .ok { color:#106a10; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 6px; border: 1px solid #eee; }
+    th { background:#fafafa; text-align: left; }
+    td.num { text-align: right; }
+
+    /* Gate */
+    #calculator { display: none; }
+    #login { max-width: 420px; margin: 10vh auto; }
   </style>
 </head>
 <body>
 
-  <!-- Password Section -->
+  <!-- Password Gate -->
   <div id="login" class="card">
     <h2>Enter Password</h2>
     <input type="password" id="passwordInput" placeholder="Enter password">
-    <button onclick="checkPassword()">Enter</button>
+    <button id="enterBtn">Enter</button>
     <p id="error" class="warn"></p>
   </div>
 
-  <!-- Calculator Section -->
+  <!-- Calculator (revealed after correct password) -->
   <div id="calculator">
     <h1>Net Present Value (NPV) – Calculator with Table & Charts</h1>
-    <p>Please click <b>Compute & Plot</b> after entering the required inputs. The number of cash flow entries must equal the number of years.</p>
+    <p class="hint">Enter inputs and click <b>Compute & Plot</b>. The number of cash flows must equal the number of years.</p>
 
-    <div class="card">
-      <label>Discount Rate (e.g. 0.05 = 5%)</label>
-      <input id="rate" type="number" step="0.005" min="0" value="0.05"><br><br>
+    <div class="stack">
+      <!-- Inputs -->
+      <div class="card">
+        <div class="row">
+          <div>
+            <label>Discount rate (e.g., 0.05 = 5%)</label>
+            <input id="rate" type="number" step="0.005" min="0" value="0.05">
+          </div>
+          <div>
+            <label>Initial investment (positive)</label>
+            <input id="initial" type="number" step="100" min="0" value="1000">
+          </div>
+          <div>
+            <label>Number of years</label>
+            <input id="years" type="number" step="1" min="1" value="5">
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <label>Cash flows (comma separated; length must equal “Number of years”)</label>
+          <textarea id="cflows">400, 400, 400, 400, 400</textarea>
+        </div>
+        <div style="margin-top:12px;">
+          <button id="run">Compute & Plot</button>
+          <div id="kpi" class="muted">NPV = $0.00</div>
+        </div>
+      </div>
 
-      <label>Initial Investment</label>
-      <input id="initial" type="number" step="100" min="0" value="1000"><br><br>
+      <!-- Results Table -->
+      <div id="table" class="card" style="overflow:auto;"></div>
 
-      <label>Number of Years</label>
-      <input id="years" type="number" step="1" min="1" value="5"><br><br>
-
-      <label>Cash Flows (comma separated)</label>
-      <textarea id="cflows">400, 400, 400, 400, 400</textarea><br>
-
-      <button id="run">Compute & Plot</button>
-      <div id="kpi">NPV = $0.00</div>
+      <!-- Charts -->
+      <div id="plot1" class="card"></div>
+      <div id="plot2" class="card"></div>
     </div>
-
-    <div id="table" class="card"></div>
-    <div id="plot1" class="card"></div>
-    <div id="plot2" class="card"></div>
   </div>
 
-  <!-- Password Logic -->
   <script>
-    const CORRECT_PASSWORD = "economics2025"; // Change your password here
+    /* =======================
+       Password Gate 
+       ======================= */
+    const CORRECT_PASSWORD = "economics2025"; // <-- change this to your password
+
+    function revealCalculator() {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("calculator").style.display = "block";
+      // optional: run once on reveal to populate outputs
+      safeBindAndAutorun();
+    }
 
     function checkPassword() {
       const input = document.getElementById("passwordInput").value;
       if (input === CORRECT_PASSWORD) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("calculator").style.display = "block";
+        revealCalculator();
       } else {
         document.getElementById("error").textContent = "Incorrect password. Please try again.";
       }
     }
-  </script>
 
-  <!-- NPV Calculator Script -->
-  <script>
+    document.getElementById("enterBtn").addEventListener("click", checkPassword);
+    document.getElementById("passwordInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") checkPassword();
+    });
+
+    /* =======================
+       NPV Calculator 
+       ======================= */
+
+    // Helpers
     function fmtMoney(x) {
       const neg = x < 0;
-      const v = Math.abs(x).toLocaleString(undefined, {
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      });
+      const v = Math.abs(x).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       return (neg ? "-$" : "$") + v;
     }
 
     function computeNPV(rate, initial, cashFlows) {
-      const years = Array.from({length: cashFlows.length}, (_, i) => i + 1);
+      const years = Array.from({ length: cashFlows.length }, (_, i) => i + 1);
       const discounted = years.map((t, i) => cashFlows[i] / Math.pow(1 + rate, t));
       const npv = discounted.reduce((a, b) => a + b, 0) - initial;
       const cum = [];
       let s = 0;
-      discounted.forEach(d => { s += d; cum.push(s); });
+      for (const d of discounted) { s += d; cum.push(s); }
       return { years, discounted, cum, npv };
     }
 
+    // Table
     function renderTable(container, years, cashFlows, discounted, cum) {
-      let html = "<h3>Results Table</h3><table><tr><th>Year</th><th>Cash Flow</th><th>Discounted Cash Flow</th><th>Cumulative Discounted</th></tr>";
-      years.forEach((y, i) => {
+      let html = "<h3>Results Table</h3>";
+      html += "<table>";
+      html += "<tr><th>Year</th><th>Cash Flow</th><th>Discounted Cash Flow</th><th>Cumulative DCF</th></tr>";
+      for (let i = 0; i < years.length; i++) {
         html += `<tr>
-          <td>${y}</td>
-          <td>${fmtMoney(cashFlows[i])}</td>
-          <td>${fmtMoney(discounted[i])}</td>
-          <td>${fmtMoney(cum[i])}</td>
+          <td>${years[i]}</td>
+          <td class="num">${fmtMoney(cashFlows[i])}</td>
+          <td class="num">${fmtMoney(discounted[i])}</td>
+          <td class="num">${fmtMoney(cum[i])}</td>
         </tr>`;
-      });
+      }
       html += "</table>";
       container.innerHTML = html;
     }
 
-    function renderSVGBarLine({xVals, bars = [], lineVals = [], title, yLabel}) {
+    // SVG Charts (full version with axes, labels, zero line, dashed reference)
+    function renderSVGBarLine({ xVals, bars = [], lineVals = [], title, yLabel, hline = null }) {
       const allVals = [...bars, ...lineVals];
-      const maxVal = Math.max(...allVals, 0);
-      const minVal = Math.min(...allVals, 0);
-      const W = 900, H = 360, pad = 50;
-      const yScale = v => H - pad - (v - minVal) * ((H - 2 * pad) / (maxVal - minVal || 1));
-      const xScale = i => pad + i * ((W - 2 * pad) / (xVals.length - 1 || 1));
+      const maxVal = allVals.length ? Math.max(0, ...allVals) : 0;
+      const minVal = allVals.length ? Math.min(0, ...allVals) : 0;
+      let yMax = maxVal * 1.2;
+      let yMin = minVal * 1.2;
+      if (yMax === yMin) { yMax += 1; }
 
-      let svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-        <text x="${W/2}" y="20" text-anchor="middle" font-size="18">${title}</text>`;
-      bars.forEach((v, i) => {
-        svg += `<rect x="${xScale(i)-10}" y="${yScale(v)}" width="20" height="${Math.abs(yScale(0)-yScale(v))}" fill="#88aaff"/>`;
-      });
-      if (lineVals.length) {
-        svg += `<polyline fill="none" stroke="red" stroke-width="2" points="${
-          lineVals.map((v, i) => `${xScale(i)},${yScale(v)}`).join(" ")
-        }"/>`;
+      const W = 900, H = 360, pad = 60;
+      const innerW = W - 2 * pad, innerH = H - 2 * pad;
+
+      const yToPx = v => H - pad - (v - yMin) * innerH / (yMax - yMin);
+      const xToPx = i => (xVals.length === 1) ? (pad + innerW / 2) : (pad + i * (innerW / (xVals.length - 1)));
+
+      let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+      // Title & labels
+      svg += `<text x="${W/2}" y="24" text-anchor="middle" font-size="16" font-weight="600">${title}</text>`;
+      svg += `<text x="${pad}" y="${H-8}" font-size="12">Year</text>`;
+      svg += `<text x="14" y="${H/2}" transform="rotate(-90,14,${H/2})" font-size="12">${yLabel}</text>`;
+
+      // Axes
+      svg += `<line x1="${pad}" y1="${pad}" x2="${pad}" y2="${H-pad}" stroke="black" stroke-width="1"/>`;
+      svg += `<line x1="${pad}" y1="${H-pad}" x2="${W-pad}" y2="${H-pad}" stroke="black" stroke-width="1"/>`;
+
+      // Zero line
+      const zeroY = yToPx(0);
+      svg += `<line x1="${pad}" y1="${zeroY}" x2="${W-pad}" y2="${zeroY}" stroke="gray" stroke-width="0.8"/>`;
+
+      // Optional dashed reference line
+      if (hline !== null) {
+        const hy = yToPx(hline);
+        svg += `<line x1="${pad}" y1="${hy}" x2="${W-pad}" y2="${hy}" stroke="#555" stroke-width="1.5" stroke-dasharray="6,6"/>`;
+        svg += `<text x="${W-pad-4}" y="${hy-6}" text-anchor="end" font-size="12" fill="#555">Reference: ${fmtMoney(hline)}</text>`;
       }
-      svg += "</svg>";
+
+      // Bars
+      if (bars.length) {
+        const barW = Math.max(8, Math.min(30, innerW / Math.max(20, xVals.length * 2)));
+        for (let i = 0; i < bars.length; i++) {
+          const x = xToPx(i) - barW / 2;
+          const yTop = yToPx(Math.max(0, bars[i]));
+          const yBot = yToPx(Math.min(0, bars[i]));
+          const h = Math.abs(yBot - yTop);
+          svg += `<rect x="${x}" y="${Math.min(yTop, yBot)}" width="${barW}" height="${h}" fill="#88aaff" opacity="0.75"/>`;
+        }
+      }
+
+      // Line + points
+      if (lineVals.length) {
+        const pts = lineVals.map((v, i) => `${xToPx(i)},${yToPx(v)}`).join(" ");
+        svg += `<polyline points="${pts}" fill="none" stroke="#aa3344" stroke-width="2"/>`;
+        for (let i = 0; i < lineVals.length; i++) {
+          svg += `<circle cx="${xToPx(i)}" cy="${yToPx(lineVals[i])}" r="3" fill="#aa3344"/>`;
+        }
+      }
+
+      // X ticks
+      for (let i = 0; i < xVals.length; i++) {
+        const x = xToPx(i);
+        svg += `<line x1="${x}" y1="${H-pad}" x2="${x}" y2="${H-pad+6}" stroke="black"/>`;
+        svg += `<text x="${x}" y="${H-pad+18}" text-anchor="middle" font-size="12">${xVals[i]}</text>`;
+      }
+
+      svg += `</svg>`;
       return svg;
     }
 
-    document.getElementById("run").onclick = function () {
-      const r = parseFloat(rate.value), i = parseFloat(initial.value), n = +years.value;
-      const cf = cflows.value.split(",").map(Number);
+    function renderPlots(plot1El, plot2El, years, cashFlows, discounted, cum, initial) {
+      const svg1 = renderSVGBarLine({
+        xVals: years, bars: cashFlows, lineVals: discounted,
+        title: "Cash Flows (bars) vs Discounted Cash Flows (line)",
+        yLabel: "Amount ($)"
+      });
+      plot1El.innerHTML = svg1;
 
-      if (cf.length !== n) {
-        kpi.textContent = "The number of cash flows must equal the number of years.";
-        return;
+      const svg2 = renderSVGBarLine({
+        xVals: years, bars: [], lineVals: cum,
+        title: "Cumulative Discounted Inflows vs Initial Investment",
+        yLabel: "Amount ($)", hline: initial
+      });
+      plot2El.innerHTML = svg2;
+    }
+
+    // Bind & run (safe to call after gate reveals the DOM)
+    function bindRun() {
+      const btn = document.getElementById("run");
+      if (!btn) return;
+      btn.addEventListener("click", onRun);
+    }
+
+    function onRun() {
+      const kpi = document.getElementById("kpi");
+      try {
+        const r = parseFloat(document.getElementById("rate").value);
+        const initial = parseFloat(document.getElementById("initial").value);
+        const n = parseInt(document.getElementById("years").value, 10);
+        const cfStr = document.getElementById("cflows").value.trim();
+        const cf = cfStr.replace(/\s+/g, "").split(",").filter(Boolean).map(Number);
+
+        if (Number.isNaN(r) || Number.isNaN(initial) || Number.isNaN(n)) {
+          throw new Error("Please enter valid numbers.");
+        }
+        if (cf.length !== n) {
+          throw new Error(`Expected ${n} cash flows, got ${cf.length}.`);
+        }
+
+        const { years, discounted, cum, npv } = computeNPV(r, initial, cf);
+        kpi.innerHTML = `<span class="ok">NPV = ${fmtMoney(npv)}</span>`;
+        renderTable(document.getElementById("table"), years, cf, discounted, cum);
+        renderPlots(document.getElementById("plot1"), document.getElementById("plot2"), years, cf, discounted, cum, initial);
+      } catch (e) {
+        console.error(e);
+        kpi.innerHTML = `<span class="warn">Error: ${e.message}</span>`;
       }
+    }
 
-      const result = computeNPV(r, i, cf);
-      kpi.textContent = "NPV = " + fmtMoney(result.npv);
-      renderTable(document.getElementById("table"), result.years, cf, result.discounted, result.cum);
-      document.getElementById("plot1").innerHTML = renderSVGBarLine({xVals: result.years, bars: cf, lineVals: result.discounted, title: "Cash Flow vs Discounted", yLabel: "Amount"});
-      document.getElementById("plot2").innerHTML = renderSVGBarLine({xVals: result.years, lineVals: result.cum, title: "Cumulative Discounted Cash Flow", yLabel: "Amount"});
-    };
+    function safeBindAndAutorun() {
+      bindRun();
+      // Auto-run once to render default outputs
+      if (document.getElementById("calculator").style.display !== "none") {
+        onRun();
+      }
+    }
   </script>
-
 </body>
 </html>
