@@ -83,7 +83,7 @@
     /* =======================
        Password Gate 
        ======================= */
-    const CORRECT_PASSWORD = "economics2025"; // <-- change this to your password
+    const CORRECT_PASSWORD = "economics2025"; // Password
 
     function revealCalculator() {
       document.getElementById("login").style.display = "none";
@@ -110,7 +110,7 @@
        NPV Calculator 
        ======================= */
 
-    // Helpers
+    // Functions
     function fmtMoney(x) {
       const neg = x < 0;
       const v = Math.abs(x).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
